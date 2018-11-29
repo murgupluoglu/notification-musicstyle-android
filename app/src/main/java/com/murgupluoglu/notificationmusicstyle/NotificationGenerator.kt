@@ -14,12 +14,12 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 
 
-const val NOTIFY_PREVIOUS = "NOTIFY_PREVIOUS"
-const val NOTIFY_PAUSE = "NOTIFY_PAUSE"
 const val NOTIFY_PLAY = "NOTIFY_PLAY"
-const val NOTIFY_NEXT = "NOTIFY_NEXT"
+const val NOTIFY_PAUSE = "NOTIFY_PAUSE"
 const val NOTIFY_STOP = "NOTIFY_STOP"
-const val STARTFOREGROUND_ACTION = "STARTFOREGROUND_ACTION"
+const val NOTIFY_NEXT = "NOTIFY_NEXT"
+const val NOTIFY_PREVIOUS = "NOTIFY_PREVIOUS"
+const val START_SERVICE = "START_SERVICE"
 
 const val NOTIFICATION_ID = 99
 
@@ -28,15 +28,15 @@ class NotificationGenerator(var notificationIntentClass: Class<*> = MainActivity
     private var notificationManager: NotificationManager? = null
     private var notificationChannel: NotificationChannel? = null
 
-    private val CHANNEL_ID = "br.com.conseng.notificationdemo"
+    private val CHANNEL_ID = "com.murgupluoglu.notificationdemo"
     private val CHANNEL_NAME = "Test notification"
 
     private val NOTIFICATION_TITLE = "Music Player"
     private val NOTIFICATION_TEXT = "Control Audio"
-    private val NOTIFICATION_TICKER = "Illustrate how a big content notification can be created."
+    private val NOTIFICATION_TICKER = "Music Player Playing Now."
     private val NOTIFICATION_STATUSBAR_PLAY_ICON = R.drawable.ic_stat_big_content
 
-    fun showBigContentMusicPlayer(context: Context, songTitle: String = "Song Title", artistName: String = "Artist Name", albumName: String = "Album Name") {
+    fun showNotification(context: Context, songTitle: String = "Song Title", artistName: String = "Artist Name", albumName: String = "Album Name") {
         // Using RemoteViews to bind custom layouts into Notification
         val smallView = RemoteViews(context.packageName, R.layout.status_bar)
         val bigView = RemoteViews(context.packageName, R.layout.status_bar_expanded)
@@ -67,7 +67,7 @@ class NotificationGenerator(var notificationIntentClass: Class<*> = MainActivity
         }
 
         // Notification through notification manager
-        notification.flags = Notification.FLAG_ONGOING_EVENT
+        notification.flags = Notification.FLAG_ONLY_ALERT_ONCE
         notificationManager?.notify(NOTIFICATION_ID, notification)
     }
 

@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         sendNotificationButton.setOnClickListener {
             val serviceIntent = Intent(applicationContext, NotificationService::class.java)
-            serviceIntent.setAction(STARTFOREGROUND_ACTION)
+            serviceIntent.setAction(START_SERVICE)
             startService(serviceIntent)
-            notificationGenerator.showBigContentMusicPlayer(applicationContext)
+            notificationGenerator.showNotification(applicationContext)
             Toast.makeText(this, "Sent a big content notification with action buttons.", Toast.LENGTH_SHORT).show()
         }
     }
